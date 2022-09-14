@@ -5,29 +5,35 @@ import styled from "styled-components";
 // max-width: 50px;
 // `
 
-const Product = ({product, addToBasket}) => {
+const Product = ({ product, addToBasket, removeDogFromBasket }) => {
+  // const handleClick = () => {
+  //     inBasketToggle(product)
 
+  // }
 
-    // const handleClick = () => {
-    //     inBasketToggle(product)
+  const buttonChoice = product.isInBasket ? (
+    <button onClick={() => addToBasket(product.id)}>{inBasketText} </button>
+  ) : (
+    <button onClick={() => removeDogFromBasket(product.id)}>
+      {inBasketText}{' '}
+    </button>
+  )
 
-    // }
+  const inBasketText = product.isInBasket ? 'Remove From Basket' : 'Adopt This Dog'
 
-    const inBasketText = product.isInBasket ? "Reserved" : "Adopt This Dog"
+  // const dogsInBasket = allProducts.filter((product) => { return product.id === dog.id})
 
-        // const dogsInBasket = allProducts.filter((product) => { return product.id === dog.id})
-
-
-    return (  
+  return (
+    <div>
+      <img src={product.imageURL} width='150' height='150' />
+      <h2>Name: {product.name}</h2>
+      <p>Breed: {product.breed}</p>
+      <p>Adoption Fee: £{product.price}</p>
       <div>
-        <img src={product.imageURL} width='150' height='150'/>
-        <h2>Name: {product.name}</h2>
-        <p>Breed: {product.breed}</p>
-        <p>Adoption Fee: £{product.price}</p>
-        <p>In Basket: {product.inBasket}</p>
         <button onClick={() => addToBasket(product.id)}>{inBasketText} </button>
       </div>
-    )
+    </div>
+  )
 }
 
 export default Product

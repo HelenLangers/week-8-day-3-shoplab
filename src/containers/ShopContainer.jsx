@@ -136,18 +136,41 @@ const ShopContainer = () => {
         setProductsInBasket(dogsInBasket)
     }
 
+    // const addToBasket = (dogId) => {
+    //     const selectedDog = allProducts.find((product) => {return product.id === dogId ? {...selectedDog, isInBasket : true} : })
+    //     console.log(selectedDog)
+        
+    // }
+
+
 
     return (
-
-        <Router>
-            <NavBar />
-            <Routes>
-                <Route exact path='/' element={< Home products={allProducts} addToBasket={addToBasket} />} />
-                <Route path="/basket" element={< Basket products={productsInBasket} removeDogFromBasket={removeDogFromBasket}/>}/>
-                <Route path="*" element={< ErrorPage />} />
-            </Routes>
-        </Router>
-
+      <Router>
+        <NavBar />
+        <Routes>
+          <Route
+            exact
+            path='/'
+            element={
+              <Home
+                products={allProducts}
+                addToBasket={addToBasket}
+                removeDogFromBasket={removeDogFromBasket}
+              />
+            }
+          />
+          <Route
+            path='/basket'
+            element={
+              <Basket
+                products={productsInBasket}
+                removeDogFromBasket={removeDogFromBasket}
+              />
+            }
+          />
+          <Route path='*' element={<ErrorPage />} />
+        </Routes>
+      </Router>
     )
 }
 
