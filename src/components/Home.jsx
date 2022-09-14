@@ -1,10 +1,10 @@
 import React from "react";
 import Product from "./Product";
 
-const Home = ({products, inBasketToggle}) => {
+const Home = ({products, addToBasket}) => {
 
     const listItems = products.map((product) => {
-    return <Product key={product.id} product={product} inBasketToggle={inBasketToggle} /> })
+    return <Product key={product.id} product={product} addToBasket={addToBasket} /> })
 
     return (
         <div>

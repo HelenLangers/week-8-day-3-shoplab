@@ -5,23 +5,27 @@ import styled from "styled-components";
 // max-width: 50px;
 // `
 
-const Product = ({product, inBasketToggle}) => {
+const Product = ({product, addToBasket}) => {
 
 
-    const handleClick = () => {
-        inBasketToggle(product.id)
+    // const handleClick = () => {
+    //     inBasketToggle(product)
 
-    }
+    // }
 
-    const inBasketText = product.inBasket ? "Reserved" : "Adopt This Dog"
+    const inBasketText = product.isInBasket ? "Reserved" : "Adopt This Dog"
 
-    return (
+        // const dogsInBasket = allProducts.filter((product) => { return product.id === dog.id})
+
+
+    return (  
       <div>
         <img src={product.imageURL} width='150' height='150'/>
         <h2>Name: {product.name}</h2>
         <p>Breed: {product.breed}</p>
         <p>Adoption Fee: £{product.price}</p>
-        <button onClick={handleClick}>{inBasketText} </button>
+        <p>In Basket: {product.inBasket}</p>
+        <button onClick={() => addToBasket(product.id)}>{inBasketText} </button>
       </div>
     )
 }

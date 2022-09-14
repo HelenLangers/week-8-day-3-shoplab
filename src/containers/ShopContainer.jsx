@@ -96,28 +96,45 @@ const ShopContainer = () => {
     const [selectedProduct, setSelectedProduct] = useState([])
     const [productsInBasket, setProductsInBasket] = useState([])
 
-    const inBasketToggle = (id) => { 
-        const dogToAddToBasket = allProducts.find(product => product.id ===id)
-        const copyOfBasket = [...productsInBasket, dogToAddToBasket]
-        setProductsInBasket(copyOfBasket)
+    // const inBasketToggle = (id) => { 
+    //     const dogToAddToBasket = allProducts.find(product => product.id ===id)
+    //     const copyOfBasket = [...productsInBasket, dogToAddToBasket]
+    //     setProductsInBasket(copyOfBasket)
+    // }
+
+    // const allProductIds = allProducts.map(product => product.id)
+
+    // const allProductIdsInBasket = productsInBasket.map(product => product.id)
+
+    // const filtereredProductIds = allProductIds.filter((product) => !allProductIdsInBasket.includes(product))
+
+    // const filteredItems = allProducts.filter(product => filtereredProductIds.includes(product.id))
+
+    // const addDogBackIntoStore = allProducts
+
+    // const inBasketToggle = (dog) => {
+    //     const dogsInBasket = allProducts.filter((product) => { return product.id === dog.id})
+    //     const updatedDog = dogsInBasket.map((dog) => {return {...dog, isInBasket: true}})
+    //     setProductsInBasket(updatedDog)
+    //  }
+
+    const findDog = (dogId) => {
+        return allProducts.find((product) => product.id === dogId )
     }
 
-    const allProductIds = allProducts.map(product => product.id)
+    const addToBasket = (dogId) => {
+        const selectedDog = findDog(dogId)
+        selectedDog.isInBasket = true
+        const dogsInBasket = allProducts.filter((product) => { return product.isInBasket === true})
+        setProductsInBasket(dogsInBasket)
+    }
 
-    const allProductIdsInBasket = productsInBasket.map(product => product.id)
-
-    const filtereredProductIds = allProductIds.filter((product) => !allProductIdsInBasket.includes(product))
-
-    const filteredItems = allProducts.filter(product => filtereredProductIds.includes(product.id))
-
-
-    // loop through all products
-    // check each id of all products and if it matches the filtered FileList
-    // return the object
-
-    console.log(filteredItems)
-
-
+    const removeDogFromBasket = (dogId) => {
+        const selectedDog = findDog(dogId)
+        selectedDog.isInBasket = false
+        const dogsInBasket = allProducts.filter((product) => { return product.isInBasket === true})
+        setProductsInBasket(dogsInBasket)
+    }
 
 
     return (
@@ -125,8 +142,8 @@ const ShopContainer = () => {
         <Router>
             <NavBar />
             <Routes>
-                <Route exact path='/' element={< Home products={filteredItems} inBasketToggle={inBasketToggle} />} />
-                <Route path="/basket" element={< Basket products={productsInBasket}/>}/>
+                <Route exact path='/' element={< Home products={allProducts} addToBasket={addToBasket} />} />
+                <Route path="/basket" element={< Basket products={productsInBasket} removeDogFromBasket={removeDogFromBasket}/>}/>
                 <Route path="*" element={< ErrorPage />} />
             </Routes>
         </Router>
