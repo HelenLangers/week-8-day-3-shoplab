@@ -5,7 +5,6 @@ import styled from "styled-components";
 // max-width: 50px;
 // `
 
-
 const Product = ({product, inBasketToggle}) => {
 
 
@@ -14,7 +13,7 @@ const Product = ({product, inBasketToggle}) => {
 
     }
 
-    const inBasketText = product.inBasket ? "Sorry, no room" : "Adopt This Dog"
+    const inBasketText = product.inBasket ? "Reserved" : "Adopt This Dog"
 
     return (
       <div>

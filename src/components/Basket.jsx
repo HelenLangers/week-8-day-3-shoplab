@@ -19,9 +19,10 @@ const Basket = ({ products }) => {
       <div>
         {products.map(product => {
             return (
-                <p> 
-                {product.name}
-                </p>
+              <div>
+                <p>{product.name}</p>
+                <button onClick={handleClick}>Return Dog To Shelter</button>
+              </div>
             )
         })}
       </div>

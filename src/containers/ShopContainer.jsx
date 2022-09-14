@@ -97,12 +97,25 @@ const ShopContainer = () => {
     const [productsInBasket, setProductsInBasket] = useState([])
 
     const inBasketToggle = (id) => { 
-        const addToBasket = allProducts.find(product => product.id ===id)
-        const copyOfBasket = [...productsInBasket, addToBasket]
+        const dogToAddToBasket = allProducts.find(product => product.id ===id)
+        const copyOfBasket = [...productsInBasket, dogToAddToBasket]
         setProductsInBasket(copyOfBasket)
     }
 
+    const allProductIds = allProducts.map(product => product.id)
 
+    const allProductIdsInBasket = productsInBasket.map(product => product.id)
+
+    const filtereredProductIds = allProductIds.filter((product) => !allProductIdsInBasket.includes(product))
+
+    const filteredItems = allProducts.filter(product => filtereredProductIds.includes(product.id))
+
+
+    // loop through all products
+    // check each id of all products and if it matches the filtered FileList
+    // return the object
+
+    console.log(filteredItems)
 
 
 
@@ -112,7 +125,7 @@ const ShopContainer = () => {
         <Router>
             <NavBar />
             <Routes>
-                <Route exact path='/' element={< Home products={allProducts} inBasketToggle={inBasketToggle} />} />
+                <Route exact path='/' element={< Home products={filteredItems} inBasketToggle={inBasketToggle} />} />
                 <Route path="/basket" element={< Basket products={productsInBasket}/>}/>
                 <Route path="*" element={< ErrorPage />} />
             </Routes>
